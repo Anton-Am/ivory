@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivory Lounge Menu</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="img/site.webmanifest">
+    <link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#000000">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="theme-color" content="#000000">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            max-width: 200px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .menu-section {
+            margin-bottom: 30px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            flex-grow: 1;
+        }
+
+        .item-price {
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .back {
+            position: absolute;
+            opacity: 0.2;
+            width: 100vw;
+        }
+
+        .lt {
+            left: 0;
+            top: 0;
+        }
+
+        .mid {
+            left: 50%;
+            top: 50%;
+            margin-top: -15%;
+            margin-left: -50vw;
+        }
+
+        .rb {
+            right: 0;
+            bottom: 0;
+        }
+
+        @media (min-width: 768px) {
+            .menu-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .menu-section {
+                width: 48%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .back {
+                width: 30%;
+            }
+
+            .mid {
+                margin-left: -15%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="logo">
+    <img src="img/logo.svg" alt="Ivory Lounge">
+</div>
+<div id="menu-container" class="menu-container"></div>
+<img class="back lt" src="img/lt.svg" alt="">
+<img class="back rb" src="img/rb.svg" alt="">
+<img class="back mid" src="img/md.svg" alt="">
+<script>
+    const menuData = [
+        {
+            title: "ЧАЙ",
+            items: [
+                ["Ромашковый", "800ml 520₽"],
+                ["Гречишный", "800ml 490₽"],
+                ["Ассам", "800ml 490₽"],
+                ["Сенча", "800ml 490₽"],
+                ["Эрл Грей", "800ml 490₽"],
+                ["Жасминовый", "800ml 520₽"],
+                ["Таежный сбор", "800ml 520₽"],
+                ["Ягоды и травы", "800ml 520₽"]
+            ]
+        },
+        {
+            title: "ПРЕМИУМ ЧАЙ",
+            items: [
+                ["Те гуань инь", "800ml 540₽"],
+                ["Да хун пао", "800ml 540₽"],
+                ["Молочный улун", "800ml 540₽"],
+                ["Пуэр отборный", "800ml 540₽"]
+            ]
+        },
+        {
+            title: "АВТОРСКИЙ ЧАЙ",
+            items: [
+                ["Облепиховый", "750ml 600₽"],
+                ["Марокканский", "750ml 600₽"],
+                ["Имбирный", "750ml 600₽"],
+                ["Пряный манго", "750ml 600₽"],
+                ["Тропический", "750ml 600₽"],
+                ["Клубника мята", "750ml 600₽"],
+                ["Вишневый пуэр", "750ml 600₽"]
+            ]
+        },
+        {
+            title: "ЛИМОНАДЫ",
+            items: [
+                ["Тропический", "400ml/1l 320₽/700₽"],
+                ["Малина маракуйя", "400ml/1l 320₽/700₽"],
+                ["Киви яблоко", "400ml/1l 320₽/700₽"],
+                ["Мандариновый", "400ml/1l 320₽/700₽"],
+                ["Мохито", "400ml/1l 320₽/700₽"],
+                ["Клубника грейпфрут", "400ml/1l 320₽/700₽"],
+                ["Ягодный микс", "400ml/1l 320₽/700₽"]
+            ]
+        },
+        {
+            title: "СМУЗИ",
+            items: [
+                ["Ягодный", "400ml 400₽"],
+                ["Банан клубника", "400ml 400₽"],
+                ["Банан киви", "400ml 400₽"]
+            ]
+        },
+        {
+            title: "КОФЕ",
+            items: [
+                ["Espresso", "150₽"],
+                ["Double espresso", "190₽"],
+                ["Cappuccino", "240₽"],
+                ["Latte", "240₽"],
+                ["Americano", "220₽"],
+                ["Raf coffee", "290₽"]
+            ]
+        },
+        {
+            title: "СНЕКИ",
+            items: [
+                ["Арахис соленый", "220₽"],
+                ["Арахис в паприкове", "240₽"],
+                ["Фисташки", "390₽"],
+                ["Pringles в ассорти", "440₽"]
+            ]
+        },
+        {
+            title: "ПИВО/СИДР",
+            items: [
+                ["Budwiser", "0.5ml 350₽"],
+                ["Guinness", "0.5ml 450₽"],
+                ["Corona Extra", "0.33ml 350₽"],
+                ["Hoegaarden", "0.5ml 350₽"],
+                ["Stella Artois", "0.5ml 290₽"],
+                ["Сидр Яблоко", "0.5ml 320₽"],
+                ["Сидр Ягоды", "0.5ml 320₽"],
+                ["Сидр Груша", "0.5ml 320₽"],
+                ["Пиво Б/А", "0.5ml 290₽"]
+            ]
+        },
+        {
+            title: "ПРОХЛАДИТЕЛЬНЫЕ НАПИТКИ",
+            items: [
+                ["Coca Cola", "0.33ml 240₽"],
+                ["Coca Cola zero", "0.33ml 240₽"],
+                ["Fanta Sprite", "0.33ml 240₽"],
+                ["Sprite", "0.33ml 240₽"],
+                ["Red bull", "0.25ml 290₽"],
+                ["Schweppes Tonic", "0.25ml 240₽"],
+                ["Legend of Baikal", "0.5ml 220₽"],
+                ["Dr Pepper", "0.33ml 295₽"]
+            ]
+        },
+        {
+            title: "СЛАДКОЕ",
+            items: [
+                ["Чизкейк «Нью-Йорк»", "340₽"],
+                ["Морковный десерт", "340₽"],
+                ["Пирожное «Карамель-Орехи»", "420₽"],
+                ["Тарталетка малиновая", "340₽"],
+                ["Мороженое", "1 шарик/120₽"]
+            ]
+        }
+    ];
+
+    function renderMenu() {
+        const container = document.getElementById('menu-container');
+        menuData.forEach(section => {
+            const sectionElement = document.createElement('div');
+            sectionElement.className = 'menu-section';
+            sectionElement.innerHTML = `<h2>${section.title}</h2>`;
+            section.items.forEach(item => {
+                sectionElement.innerHTML += `
+                        <div class="menu-item">
+                            <span class="item-name">${item[0]}</span>
+                            <span class="item-price">${item[1]}</span>
+                        </div>
+                    `;
+            });
+            container.appendChild(sectionElement);
+        });
+    }
+    renderMenu();
+</script>
+</body>
+</html>
